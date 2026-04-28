@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Gourmet Bistro</title>
+</head>
+<body>
+
+    <div>
+        <form action = "search" method = "GET">
+        {% csrf_token %}
+
+            <table>
+                <tr>
+                    <h1>Search receipe</h1><br>
+                    <td><input type = "text" placeholder = "Search Here" name = "searchdata"></td>
+                </tr>
+
+                <tr>
+                    <th><input type = "submit" value = "submit"></th>
+                </tr>
+                    
+            </table>
+
+        </form>
+    </div>
+
+
+
+<hr>
+<br><br>
+<table class="table" border="1">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Recipe Name</th>
+      <th scope="col">Recipe Description</th>
+      <th scope="col">Recipe image</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for i in result%}
+
+    <tr>
+      <th scope="row">{{ forloop.counter }}</th>
+      <td>{{i.receipe_name}}</td>
+      <td>{{i.receipe_description}}</td>
+      <td><img src="{{i.receipe_image.url}}" width="100"> </td>
+    {% endfor %}
+  </tbody>
+</table>
+
+</body>
+</html>

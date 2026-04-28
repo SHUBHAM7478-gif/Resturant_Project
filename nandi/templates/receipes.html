@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RESTURANT </title>
+    <style>
+         /* 1. Center the form on the page */
+body {
+    background-color: #f8f9fa; /* Light grey background */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* 2. The Card Container */
+.form-container {
+    background: white;
+    padding: 30px;
+    border: 1px solid #dee2e6;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+    width: 100%;
+    max-width: 600px; /* Limits the width like in your image */
+}
+
+/* 3. Spacing for form groups */
+.mb-3 {
+    margin-bottom: 1rem;
+}
+
+/* 4. Labels */
+label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 500;
+    color: #212529;
+}
+
+/* 5. Input styling (Text and Textarea) */
+.form-control {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ced4da;
+    border-radius: 5px;
+    box-sizing: border-box; /* Ensures padding doesn't break width */
+    font-size: 1rem;
+}
+
+.form-control:focus {
+    border-color: #86b7fe;
+    outline: 0;
+    box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+}
+
+/* 6. The Submit Button */
+.btn-primary {
+    width: 50%;
+    background-color: #0d6efd;
+    color: white;
+    border: none;
+    padding: 12px;
+    border-radius: 5px;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.btn-primary:hover {
+    width: 50px
+    background-color: #0b5ed7;
+}
+    </style>
+</head>
+<body>
+   <div class="conatiner mt-5">
+
+         <form action="recipes" method = "POST" enctype="multipart/form-data">
+             {% csrf_token %}
+            <h2> ADD RECEIPE </h2>
+             <h2 class="text-center mb-4">Receipe Form</h2>
+            <div class="mb-3">
+
+                <label for="exampleInputEmail1" class="form-label">Receipe Name</label>
+                <input name = "receipe_name" type="text" class="form-control">
+        
+            </div>
+            <div class="mb-3">
+
+                <label for="exampleInputPassword1" name = "receipe_description" class="form-label">Receipe Description</label>
+                <textarea name = "receipe_description" class="form-control"></textarea>
+
+            </div>
+
+            <div class="mb-3">
+
+                <label for="exampleInputPassword1" class="form-label">Recceipe Image</label>
+                <input type="file" name = "receipe_image" class="form-control">
+
+            </div>
+
+    
+            <button type="submit" class="btn btn-primary">Add Receipe</button>
+        </form>
+
+        {% comment %} {{receipes}}    <!-- This will display the list of receipes passed from the view --> {% endcomment %}
+
+
+<hr>
+<br><br>
+<table class="table" border="1">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Recipe Name</th>
+      <th scope="col">Recipe Description</th>
+      <th scope="col">Recipe image</th>
+      <th scope="col">Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for recipe in receipes%}
+
+    <tr>
+      <th scope="row">{{ forloop.counter }}</th>
+      <td>{{recipe.receipe_name}}</td>
+      <td>{{recipe.receipe_description}}</td>
+      <td><img src="{{recipe.receipe_image.url}}" width="100"> </td>
+      <td> <a href="delete_recipes/{{recipe.id}}/">Delete</a> <br><br>
+        <a href="update_recipes/{{recipe.id}}/">Update</a></td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+   </div>
+</body>
+</html>

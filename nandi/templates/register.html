@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RESTURANT </title>
+    <style>
+         /* 1. Center the form on the page */
+        body {
+            background-color: #f8f9fa; /* Light grey background */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        /* 2. The Card Container */
+        .form-container {
+            background: white;
+            padding: 30px;
+            border: 1px solid #dee2e6;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            width: 100%;
+            max-width: 600px; /* Limits the width like in your image */
+        }
+
+        /* 3. Spacing for form groups */
+        .mb-3 {
+            margin-bottom: 1rem;
+        }
+
+        /* 4. Labels */
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: #212529;
+        }
+
+        /* 5. Input styling (Text and Textarea) */
+        .form-control {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ced4da;
+            border-radius: 5px;
+            box-sizing: border-box; /* Ensures padding doesn't break width */
+            font-size: 1rem;
+        }
+
+        .form-control:focus {
+            border-color: #86b7fe;
+            outline: 0;
+            box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+        }
+
+        /* 6. The Submit Button */
+        .btn-primary {
+            width: 50%;
+            background-color: #0d6efd;
+            color: white;
+            border: none;
+            padding: 12px;
+            border-radius: 5px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        .btn-primary:hover {
+            width: 50px;
+            background-color: #0b5ed7;
+        }
+    </style>
+  
+</head>
+<body>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+   <div class="container mt-5">
+
+        <form method = "POST">
+             {% csrf_token %}
+            <h2> REGISTER </h2>
+            <div class="alert alert-primary" role="alert">
+                <div>  
+                    {% if messages %}
+                        <ul class="messages">
+                        {% for message in messages %}
+                        <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>
+                        {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}Important: {% endif %}
+                        {{ message }}
+                        </li>
+                        {% endfor %}
+                        </ul>
+                    {% endif %}
+
+                </div>
+            </div>
+             <h2 class="text-center mb-4">Register Form</h2>
+            <div class="mb-3">
+                <label  class="form-label">First name</label>
+                <input class="form-control" type="text" name = "first_name">
+            </div>
+
+            <div class="mb-3">
+                <label  class="form-label">Last Name</label>
+                <input class="form-control" type="text" name = "last_name">
+            </div>
+
+            <div class="mb-3"> 
+                <label class="form-label">Username</label>
+                <input class="form-control" name = "username">
+            </div>
+
+            <div class="mb-3">
+                <label  class="form-label">Password</label>
+                <input type="password" class="form-control" name ="password">
+            </div>
+            
+            <button type="submit" class="btn btn-primary">Submit</button>
+            
+
+            <p class="mb-3">if you have account! <a href="/login/">log in</a></P>
+        </form>
+
+</body>
+</html>
