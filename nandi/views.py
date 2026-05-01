@@ -98,7 +98,6 @@ def register_page(request):
 
 
 
-
 def login_page(request):
     if request.method == "POST":
         username = request.POST.get('username')
