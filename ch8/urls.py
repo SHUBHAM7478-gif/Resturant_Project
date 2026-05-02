@@ -26,6 +26,7 @@ urlpatterns = [
     path('search', views.search),
     path('recipes/', views.receipe),
     path('login/', views.login_page),
+    path('logout/', views.logout_page),
     path('register/', views.register_page),
     path('delete_recipes/<id>/', views.delete_receipe, name = "delete_recipe"),
     path('update_recipes/<id>/', views.update_receipe, name = "update_recipe"),

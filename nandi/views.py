@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from .models import Receipe
 from django.contrib.auth.models import User
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 
 # Create your views here.
@@ -105,17 +105,22 @@ def login_page(request):
 
         if not User.objects.filter(username=username).exists():
             messages.error(request, 'User does not exist')
-            return redirect('login')
+            return redirect('/login/')
 
         user = authenticate(request, username=username, password=password)
 
-        print("Authenticated user:", user)  # DEBUG
+        # print("Authenticated user:", user)  # DEBUG
 
         if user is not None:
             login(request, user)
             return redirect('/recipes/')
         else:
             messages.error(request, 'Invalid Credentials')
-            return redirect('login')
+            return redirect('/login/')
 
     return render(request, 'login.html')
+
+
+def logout_page(request):
+    logout(request)
+    return redirect('/login/')
